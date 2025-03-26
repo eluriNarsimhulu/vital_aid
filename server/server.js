@@ -1,11 +1,14 @@
 const express = require('express');
-const dotenv = require('dotenv');
+require('dotenv').config();  // Ensure dotenv is imported here
 const cors = require('cors');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 
-// Load env vars
-dotenv.config();
+console.log("GOOGLE_CLIENT_ID:", process.env.GOOGLE_CLIENT_ID);
+console.log("GOOGLE_CLIENT_SECRET:", process.env.GOOGLE_CLIENT_SECRET);
+
+// const cors = require('cors');
+// app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 // Connect to database
 connectDB();
@@ -14,9 +17,14 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+
 
 // Routes
+const passport = require('passport');
+app.use(passport.initialize());
+
 app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {

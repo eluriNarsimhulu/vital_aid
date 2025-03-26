@@ -9,11 +9,15 @@ const signup = async (userData) => {
 };
 
 // Login user
-const login = async (credentials) => {
-  const response = await axios.post(`${API_URL}/login`, credentials);
+// Login user
+const login = async (email, password) => {
+  console.log("Login request sent with:", email, password); // Debugging log
+
+  const response = await axios.post(`${API_URL}/login`, { email, password });
+
+  console.log("Login Response:", response.data); // Debugging log
   return response.data;
 };
-
 // Get user profile
 const getUserProfile = async (token) => {
   const config = {
@@ -25,10 +29,12 @@ const getUserProfile = async (token) => {
   return response.data;
 };
 
-const authService = {
-  signup,
-  login,
-  getUserProfile,
+// Google Login
+const googleLogin = async (email, fullName) => {
+  const response = await axios.post(`${API_URL}/google-login`, { email, fullName });
+  return response.data;
 };
+
+const authService = { signup, login, getUserProfile, googleLogin };
 
 export default authService;

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import '../styles/Welcome
+import "./css/Welcome.css"
 // .css';
 
 const Welcome = () => {
   return (
     <div className="welcome-container">
       <div className="welcome-content">
-        <h1>Welcome to our App</h1>
+        <h1>Vital Aid</h1>
         <p>Join our community today and unlock amazing features!</p>
         
         <div className="welcome-buttons">
